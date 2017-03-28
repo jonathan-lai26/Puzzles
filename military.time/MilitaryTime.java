@@ -13,19 +13,24 @@ public class MilitaryTime {
 	public MilitaryTime(String[] args) {
 		for (String number : args) {
 			try {
-				table.add(Integer.parseInt(number));
+				if ((args.length > 4) || (Integer.parseInt(number) < 0) || (Integer.parseInt(number) > 9)) {
+					System.out.println(invalid);
+					System.exit(0);
+				} else {
+					table.add(Integer.parseInt(number));
+				}
 			} catch (NumberFormatException e) {
 				System.out.println("Must use intergers.");
 				System.exit(0);
 			}
 		}
 		Collections.sort(table);
-		StringBuilder sb = new StringBuilder();
-		sb.append("Sorted numbers: ");
-		for (int num : table) {
-			sb.append(num);
-		}
-		System.out.println(sb);
+		// StringBuilder sb = new StringBuilder();
+		// sb.append("Sorted numbers: ");
+		// for (int num : table) {
+		// 	sb.append(Integer.toString(num) + " ");
+		// }
+		// System.out.println(sb);
 	}
 
 	/** Constructor if using scanner */
@@ -122,8 +127,12 @@ public class MilitaryTime {
 	public static void main(String[] args) {	
 
 		MilitaryTime time = new MilitaryTime(args);
-		System.out.println(time.getTime());
-
+		String milTime = time.getTime();
+		if (milTime.equals(invalid)) {
+			System.out.println(invalid);
+		} else {
+			System.out.println("Latest time: " + time.getTime());
+		}
 		// Scanner reader = new Scanner(System.in);
 		// while(true) {
 		// 	int a = Integer.parseInt(reader.nextLine());
